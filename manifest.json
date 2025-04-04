@@ -1,0 +1,10 @@
+{
+	"id": "inline-callouts",
+	"name": "Inline Callouts",
+	"version": "0.1.0",
+	"minAppVersion": "0.15.0",
+	"description": "Add inline callouts/badges/icons to notes.",
+	"author": "@gapmiss",
+	"authorUrl": "https://github.com/gapmiss",
+	"isDesktopOnly": false
+}

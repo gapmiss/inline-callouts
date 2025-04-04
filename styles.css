@@ -1,0 +1,177 @@
+body {
+    --inline-callout-font-size: .85em;
+    --inline-callout-font-weight: 400;
+    --inline-callout-border-radius: 4px;
+    --inline-callout-bg-transparency: .1;
+    --inline-callout-margin: 1px;
+    --inline-callout-padding-top: 1px;
+    --inline-callout-padding-right: 0px;
+    --inline-callout-padding-bottom: 2px;
+    --inline-callout-padding-left: 0px;
+    --inline-callout-icon-size: .85em;
+    --inline-callout-icon-margin-top: 3px;
+    --inline-callout-icon-margin-right: 3px;
+    --inline-callout-icon-margin-bottom: 0px;
+    --inline-callout-icon-margin-left: 5px;
+    --inline-callout-label-margin-top: 2px;
+    --inline-callout-label-margin-right: 5px;
+    --inline-callout-label-margin-bottom: 0px;
+    --inline-callout-label-margin-left: 2px;
+}
+
+.inline-callout {
+    margin: var(--inline-callout-margin);
+    border-radius: var(--inline-callout-border-radius);
+    font-weight: var(--inline-callout-font-weight);
+    padding-top: var(--inline-callout-padding-top);
+    padding-right: var(--inline-callout-padding-right);
+    padding-bottom: var(--inline-callout-padding-bottom);
+    padding-left: var(--inline-callout-padding-left);
+    cursor: default;
+    display: inline-block;
+}
+
+.inline-callout-icon {
+    margin-top: var(--inline-callout-icon-margin-top);
+    margin-right: var(--inline-callout-icon-margin-right);
+    margin-bottom: var(--inline-callout-icon-margin-bottom);
+    margin-left: var(--inline-callout-icon-margin-left);
+    display: inline-flex;
+}
+
+.inline-callout-icon.inline-callout-icon svg {
+    width: var(--inline-callout-icon-size);
+    height: var(--inline-callout-icon-size);
+}
+
+.inline-callout-label {
+    font-size: var(--inline-callout-font-size);
+    margin-top: var(--inline-callout-label-margin-top);
+    margin-right: var(--inline-callout-label-margin-right);
+    margin-bottom: var(--inline-callout-label-margin-bottom);
+    margin-left: var(--inline-callout-label-margin-left);
+    display: inline-flex;
+    vertical-align: top;
+}
+
+/* @settings
+name: Inline Callouts
+id: inline-callouts
+settings:
+-
+  id: callout-settings
+  title: Callout
+  type: heading
+  level: 4
+  collapsed: true
+-
+  id: inline-callout-border-radius
+  title: Border radius
+  type: variable-text
+  default: 4px
+-
+  id: inline-callout-bg-transparency
+  title: Background transparency
+  type: variable-number-slider
+  default: .1
+  min: .0
+  max: .9
+  step: .05
+-
+  id: inline-callout-margin
+  title: Margin
+  type: variable-text
+  default: 1px
+-
+  id: inline-callout-padding-top
+  title: Top padding
+  type: variable-text
+  default: 1px
+-
+  id: inline-callout-padding-right
+  title: Right padding
+  type: variable-text
+  default: 0px
+-
+  id: inline-callout-padding-bottom
+  title: Bottom padding
+  type: variable-text
+  default: 2px
+-
+  id: inline-callout-padding-left
+  title: Left padding
+  type: variable-text
+  default: 0px
+-
+  id: icon-settings
+  title: Icon
+  type: heading
+  level: 4
+  collapsed: true
+-
+  id: inline-callout-icon-size
+  title: Size
+  description: "Both width and height"
+  type: variable-text
+  default: .85em
+-
+  id: inline-callout-icon-margin-top
+  title: Top margin
+  type: variable-text
+  default: 3px
+-
+  id: inline-callout-icon-margin-right
+  title: Right margin
+  type: variable-text
+  default: 3px
+-
+  id: inline-callout-icon-margin-bottom
+  title: Bottom margin
+  type: variable-text
+  default: 0px
+-
+  id: inline-callout-icon-margin-left
+  title: Left margin
+  type: variable-text
+  default: 5px
+-
+  id: label-settings
+  title: Label
+  type: heading
+  level: 4
+  collapsed: true
+-
+  id: inline-callout-font-size
+  title: Font size
+  type: variable-text
+  default: .85em
+-
+  id: inline-callout-font-weight
+  title: Font weight
+  type: variable-number-slider
+  default: 400
+  min: 100
+  max: 900
+  step: 100
+-
+  id: inline-callout-label-margin-top
+  title: Top margin
+  type: variable-text
+  default: 2px
+-
+  id: inline-callout-label-margin-right
+  title: Right margin
+  type: variable-text
+  default: 5px
+-
+  id: inline-callout-label-margin-bottom
+  title: Bottom margin
+  type: variable-text
+  default: 0px
+-
+  id: inline-callout-label-margin-left
+  title: Left margin
+  type: variable-text
+  default: 2px
+-
+*/
