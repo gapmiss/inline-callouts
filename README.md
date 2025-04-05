@@ -4,6 +4,7 @@
 
 A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/obsidianmd), a successor to the [Badges](https://github.com/gapmiss/badges) plugin by the same author. Key differences: simpler syntax, access to all Lucide icons used by Obsidian, modal interfaces for icon suggestions, new inline callout and modify inline callout.
 
+- [Examples](#examples)
 - [Features](#features)
 - [Usage](#usage)
 - [Caveats](#caveats)
@@ -14,6 +15,11 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 - [Credits](#credits)
 - [Notes](#notes)
 
+## Examples
+
+![](./screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-04-18.26.34.png)
+
+![](./screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-04-18.26.42.png)
 
 ## Features
 
@@ -37,15 +43,14 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 
 ## Caveats
 
-- No extraneous `|` or  <code>`</code> characters
 - Consecutive callouts must be separated by at lease one space, character, or line return to be rendered correctly in reading view.
 - Does not work inside a wiki-link
 - Markdown and HTML code is NOT rendered in the callout label
 - When using inline callouts in a table, the pipe characters must be escaped. e.g.:
 	```
-	| example one                              | example two                   |
-	| ---------------------------------------- | ----------------------------- |
-	| `[!!info\|Lorem\|var(--color-blue-rgb)]` | Lorem ipsum `[!!check-check]` |
+	| example                                  |
+	| ---------------------------------------- |
+	| `[!!info\|Lorem\|var(--color-blue-rgb)]` |
 	```
 
 ## Installation
