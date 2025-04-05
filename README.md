@@ -58,14 +58,20 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 
 ## Installation
 
-From Obsidian's settings or preferences:
+[Find at Obsidian.md/plugins](https://obsidian.md/plugins?search=inline-callouts)
 
-1. [Open in Obsidian.md](obsidian://show-plugin?id=inline-callouts)
-
-or:
+From Obsidian's settings:
 
 1. Community Plugins > Browse
-2. Search for "Badges"
+2. Search for "Inline Callouts"
+
+Via BRAT (Beta Reviewer's Auto-update Tool):
+
+1. Ensure [BRAT](https://github.com/TfTHacker/obsidian42-brat) is installed
+2. Trigger the command Obsidian42 - BRAT: Add a beta plugin for testing
+3. Enter this repository, gapmiss/inline-callouts
+4. Enable Vault Name plugin in the community plugin list
+
 
 Manually:
 
