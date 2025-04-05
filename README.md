@@ -4,7 +4,7 @@
 
 A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/obsidianmd), a successor to the [Badges](https://github.com/gapmiss/badges) plugin by the same author. Key differences: simpler syntax, access to all Lucide icons used by Obsidian, modal interfaces for icon suggestions, new inline callout and modify inline callout.
 
-- [Examples](#examples)
+- [Demo](#demo)
 - [Features](#features)
 - [Usage](#usage)
 - [Caveats](#caveats)
@@ -15,7 +15,10 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 - [Credits](#credits)
 - [Notes](#notes)
 
-## Examples
+## Demo
+
+> [!NOTE]
+> See demo markdown file [here](./demo/example.md)
 
 ![](./screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-04-18.26.34.png)
 
