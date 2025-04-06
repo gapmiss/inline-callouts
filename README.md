@@ -46,13 +46,13 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 	</p>
 </details>
 
-### Icon suggestion modal
+### Auto-complete icon suggester
 
 <details style="margin-block: 1em;">
 	<summary>👇️ Show GIF screencast</summary>
 	<p></p>
 	<p>
-		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-16.40.29.gif?raw=true" alt="Icon suggestion modal" />
+		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-16.40.29.gif?raw=true" alt="Auto-complete icon suggester" />
 	</p>
 </details>
 
@@ -72,7 +72,7 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 	<summary>👇️ Show screenshot</summary>
 	<p></p>
 	<p>
-		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-17.23.37.png?raw=true" alt="Style Settings plugin settings" />
+		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-17.23.37.png?raw=true" alt="Settings" />
 	</p>
 </details>
 
@@ -82,7 +82,7 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 	<summary>👇️ Show screenshot</summary>
 	<p></p>
 	<p>
-		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-17.24.20.png?raw=true" alt="Settings" />
+		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-17.24.20.png?raw=true" alt="Compatible with Style Settings plugin" />
 	</p>
 </details>
 
