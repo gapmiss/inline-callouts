@@ -66,8 +66,7 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 	</p>
 </details>
 
-
-### Style Settings plugin settings
+### Settings
 
 <details style="margin-block: 1em;">
 	<summary>👇️ Show screenshot</summary>
@@ -77,8 +76,7 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 	</p>
 </details>
 
-
-### Settings
+### Compatible with Style Settings plugin
 
 <details style="margin-block: 1em;">
 	<summary>👇️ Show screenshot</summary>
