@@ -20,11 +20,13 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 > [!NOTE]
 > See demo markdown file [here](./demo/example.md)
 
-![](./screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-04-18.26.34.png)
+![](./screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-15.57.34.png)
 
-![](./screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-04-18.26.42.png)
+![](./screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-15.57.39.png)
 
 ## Features
+
+
 
 ## Usage
 
@@ -36,8 +38,8 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 
 | Syntax            | Details                        |
 | ----------------- | ------------------------------ |
-| `ICON`            | name of the Lucide icon        |
-| `LABEL`(optional) | callout label/title text       |
+| `ICON`            | Name of the Lucide icon        |
+| `LABEL`(optional) | Callout label/title text       |
 | `COLOR`(optional) | RGB values or Obsidian CSS var |
 
 
@@ -49,7 +51,7 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 - Consecutive callouts must be separated by at lease one space, character, or line return to be rendered correctly in reading view.
 - Does not work inside a wiki-link
 - Markdown and HTML code is NOT rendered in the callout label
-- When using inline callouts in a table, the pipe characters must be escaped. e.g.:
+- When using inline callouts in a table, the pipe characters must be escaped by a backslash `\`. e.g.:
 	```
 	| example                                  |
 	| ---------------------------------------- |
@@ -96,7 +98,7 @@ Custom `CSS` styles can be applied via CSS snippets. All colors and styles can
 
 See [CSS snippets - Obsidian Help](https://help.obsidian.md/Extending+Obsidian/CSS+snippets)
 
-### variables
+### Variables
 
 ```css
 body {
@@ -121,9 +123,24 @@ body {
 }
 ```
 
+### Obsidian.md RGB color variables
+
+```css
+var(--mono-rgb-0)
+var(--mono-rgb-100)
+var(--color-red-rgb)
+var(--color-orange-rgb)
+var(--color-yellow-rgb)
+var(--color-green-rgb)
+var(--color-cyan-rgb)
+var(--color-blue-rgb)
+var(--color-purple-rgb)
+var(--color-pink-rgb)
+```
+
 ## Style Settings plugin
 
-All the above CSS variables can be modified via the [Style Settings plugin](https://github.com/mgmeyers/obsidian-style-settings)
+The above `--inline-callout-*` CSS variables can be modified via the [Style Settings plugin](https://github.com/mgmeyers/obsidian-style-settings)
 
 ## Development
 

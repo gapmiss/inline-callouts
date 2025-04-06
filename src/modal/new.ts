@@ -10,10 +10,11 @@ import { InlineCallout } from '../callout/builder';
 
 export class NewInlineCalloutModal extends Modal {
 
-	public calloutIcon: string = 'info';
+	public calloutIcon: string = 'lucide-info';
 	public calloutColor: string | undefined;
 	public calloutLabel: string | undefined;
 	previewEl: HTMLDivElement;
+	document: Document = window.activeDocument ?? window.document;
 
 	constructor(
 		private plugin: InlineCalloutsPlugin,
@@ -42,7 +43,7 @@ export class NewInlineCalloutModal extends Modal {
 			.setDesc('To select an icon, click the button. Default: info')
 			.addButton((cb) => {
 				cb
-					.setIcon('lucide-info')
+					.setIcon(this.calloutIcon)
 					.setTooltip("Select icon")
 					.onClick(async (e) => {
 						e.preventDefault();
@@ -102,7 +103,6 @@ export class NewInlineCalloutModal extends Modal {
 					"var(--color-red-rgb)": "Red",
 					"var(--color-yellow-rgb)": "Yellow",
 				})
-					// .setValue(this.calloutColor!)
 					.setValue(this.calloutColor?.startsWith("var(--color") ? this.calloutColor : '')
 					.onChange((value) => {
 						if (value !== '') {
@@ -110,9 +110,9 @@ export class NewInlineCalloutModal extends Modal {
 							this.buildPreview();
 							this.display(false, false);
 							setTimeout(() => {
-								let dropdown: HTMLSelectElement | null = window.document.querySelector(".inline-callouts-color-dropdown .dropdown");
+								let dropdown: HTMLSelectElement | null = this.document.querySelector(".new-inline-callout-modal")!.querySelector(".inline-callouts-color-dropdown .dropdown");
 								dropdown!.focus();
-							}, 25);
+							}, 10);
 						}
 					})
 			})
@@ -120,11 +120,11 @@ export class NewInlineCalloutModal extends Modal {
 				cb.setValue(this.calloutColor ?? '#000000')
 					.onChange((value) => {
 						this.calloutColor = hexToRgb(value);
-						let dropdown: HTMLSelectElement | null = window.document.querySelector(".inline-callouts-color-dropdown .dropdown");
+						let dropdown: HTMLSelectElement | null = this.document.querySelector(".new-inline-callout-modal")!.querySelector(".inline-callouts-color-dropdown .dropdown");
 						dropdown!.value = '';
 						this.buildPreview();
 						setTimeout(() => {
-							let picker: HTMLSelectElement | null = window.document.querySelector('input[type="color"]');
+							let picker: HTMLSelectElement | null = this.document.querySelector(".new-inline-callout-modal")!.querySelector('input[type="color"]');
 							picker!.focus();
 						}, 10);
 					});
@@ -134,6 +134,7 @@ export class NewInlineCalloutModal extends Modal {
 					.setTooltip('Reset to no color')
 					.onClick(() => {
 						this.calloutColor = '';
+						this.calloutIcon = this.calloutIcon;
 						this.display(false, true);
 					})
 			});
