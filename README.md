@@ -26,7 +26,35 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 
 ## Features
 
+1. New Inline Callout modal
 
+<details style="margin-block: 1em;">
+	<summary>Show screencast</summary>
+	<p></p>
+	<p>
+		<img src="" alt="" />
+	</p>
+</details>
+
+2. Modify Inline Callout Modal
+
+<details style="margin-block: 1em;">
+	<summary>Show screencast</summary>
+	<p></p>
+	<p>
+		<img src="" alt="" />
+	</p>
+</details>
+
+3. Icon suggestion modal
+
+<details style="margin-block: 1em;">
+	<summary>Show screencast</summary>
+	<p></p>
+	<p>
+		<img src="" alt="" />
+	</p>
+</details>
 
 ## Usage
 
