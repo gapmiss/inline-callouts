@@ -132,12 +132,10 @@ export class ModifyInlineCalloutModal extends Modal {
 					"var(--color-red-rgb)": "Red",
 					"var(--color-yellow-rgb)": "Yellow",
 				})
-					// .setValue(this.calloutColor!)
 					.setValue(this.calloutColor?.startsWith("var(--color") ? this.calloutColor : '')
 					.onChange((value) => {
 						if (value !== '') {
 							this.calloutColor = value;
-							// this.calloutIcon = this.calloutIcon;
 							this.buildPreview();
 							this.display(false, false, true);
 							setTimeout(() => {

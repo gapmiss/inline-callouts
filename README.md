@@ -56,6 +56,40 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 	</p>
 </details>
 
+### Search for inline callout modal
+
+<details style="margin-block: 1em;">
+	<summary>👇️ Show GIF screencast</summary>
+	<p></p>
+	<p>
+		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-17.19.23.gif?raw=true" alt="Icon suggestion modal" />
+	</p>
+</details>
+
+
+### Style Settings plugin settings
+
+<details style="margin-block: 1em;">
+	<summary>👇️ Show screenshot</summary>
+	<p></p>
+	<p>
+		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-17.23.37.png?raw=true" alt="Style Settings plugin settings" />
+	</p>
+</details>
+
+
+### Settings
+
+<details style="margin-block: 1em;">
+	<summary>👇️ Show screenshot</summary>
+	<p></p>
+	<p>
+		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-17.24.20.png?raw=true" alt="Settings" />
+	</p>
+</details>
+
+
+
 ## Usage
 
 ### Syntax
