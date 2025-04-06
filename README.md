@@ -26,30 +26,30 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 
 ## Features
 
-1. New Inline Callout modal
+### New Inline Callout modal
 
 <details style="margin-block: 1em;">
-	<summary>Show screencast</summary>
+	<summary>Show GIF screencast</summary>
 	<p></p>
 	<p>
 		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-16.28.58.gif?raw=true" alt="New Inline Callout modal" />
 	</p>
 </details>
 
-2. Modify Inline Callout Modal
+### Modify Inline Callout Modal
 
 <details style="margin-block: 1em;">
-	<summary>Show screencast</summary>
+	<summary>Show GIF screencast</summary>
 	<p></p>
 	<p>
 		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-16.32.11.gif?raw=true" alt="Modify Inline Callout modal" />
 	</p>
 </details>
 
-3. Icon suggestion modal
+### Icon suggestion modal
 
 <details style="margin-block: 1em;">
-	<summary>Show screencast</summary>
+	<summary>Show GIF screencast</summary>
 	<p></p>
 	<p>
 		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-16.40.29.gif?raw=true" alt="Icon suggestion modal" />
