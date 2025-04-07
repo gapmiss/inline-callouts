@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/obsidianmd), a successor to the [Badges](https://github.com/gapmiss/badges) plugin by the same author. Key differences: simpler syntax, access to all Lucide icons used by Obsidian, modal interfaces for icon suggestions, new inline callout and modify inline callout.
+A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/obsidianmd); a successor to the [Badges](https://github.com/gapmiss/badges) plugin by the same author. Key differences: simpler syntax, access to all Lucide icons in Obsidian, modal interfaces for icon suggestions, new inline callout and modify inline callout.
 
 - [Demo](#demo)
 - [Features](#features)
@@ -26,7 +26,7 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 
 ## Features
 
-### New Inline Callout modal
+### "New inline callout" modal
 
 <details style="margin-block: 1em;">
 	<summary>👇️ Show GIF screencast</summary>
@@ -36,7 +36,7 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 	</p>
 </details>
 
-### Modify Inline Callout Modal
+### "Modify inline callout" Modal
 
 <details style="margin-block: 1em;">
 	<summary>👇️ Show GIF screencast</summary>
@@ -46,7 +46,7 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 	</p>
 </details>
 
-### Auto-complete icon suggester
+### Editor auto-complete icon suggester
 
 <details style="margin-block: 1em;">
 	<summary>👇️ Show GIF screencast</summary>
@@ -56,23 +56,13 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 	</p>
 </details>
 
-### Search for inline callout modal
+### "Search for inline callouts" modal
 
 <details style="margin-block: 1em;">
 	<summary>👇️ Show GIF screencast</summary>
 	<p></p>
 	<p>
 		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-17.19.23.gif?raw=true" alt="Icon suggestion modal" />
-	</p>
-</details>
-
-### Settings
-
-<details style="margin-block: 1em;">
-	<summary>👇️ Show screenshot</summary>
-	<p></p>
-	<p>
-		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-17.23.37.png?raw=true" alt="Settings" />
 	</p>
 </details>
 
@@ -86,7 +76,15 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 	</p>
 </details>
 
+### Settings
 
+<details style="margin-block: 1em;">
+	<summary>👇️ Show screenshot</summary>
+	<p></p>
+	<p>
+		<img src="https://github.com/gapmiss/inline-callouts/blob/master/screenshots/Inline-Callouts-demo-Obsidian-v1.8.9-2025-04-06-17.23.37.png?raw=true" alt="Settings" />
+	</p>
+</details>
 
 ## Usage
 
@@ -108,8 +106,8 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 
 ## Caveats
 
-- Consecutive callouts must be separated by at lease one space, character, or line return to be rendered correctly in reading view.
-- Does not work inside a wiki-link
+- Consecutive inline callouts must be separated by at lease one space, character, or line return to be rendered correctly in reading view.
+- Inline callouts do not work inside wiki or external link markdown
 - Markdown and HTML code is NOT rendered in the callout label
 - When using inline callouts in a table, the pipe characters must be escaped by a backslash `\`. e.g.:
 	```
@@ -185,7 +183,7 @@ body {
 
 ### Obsidian.md RGB color variables
 
-```css
+```
 var(--mono-rgb-0)
 var(--mono-rgb-100)
 var(--color-red-rgb)

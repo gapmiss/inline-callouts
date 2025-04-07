@@ -1,7 +1,7 @@
 {
 	"name": "inline-callouts",
 	"version": "0.1.0",
-	"description": "Badges for Obsidian (https://obsidian.md)",
+	"description": "Inline callouts plugin for Obsidian (https://obsidian.md)",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
