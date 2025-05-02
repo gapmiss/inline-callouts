@@ -54,6 +54,10 @@ body {
     vertical-align: top;
 }
 
+.inline-callout-icon-select-modal {
+	width: calc(var(--dialog-width) / 1.5);
+}
+
 /* @settings
 name: Inline Callouts
 id: inline-callouts

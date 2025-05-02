@@ -13,7 +13,7 @@ export class IconSuggest extends SuggestModal<IconName> {
 
 	constructor(plugin: InlineCalloutsPlugin, callback: (icon: string) => void) {
 		super(plugin.app);
-		this.modalEl.addClass("vault-name-icon-select-modal");
+		this.modalEl.addClass("inline-callout-icon-select-modal");
 		this.plugin = plugin;
 		this.callback = callback;
 		this.setPlaceholder("Search for an icon");
@@ -38,7 +38,7 @@ export class IconSuggest extends SuggestModal<IconName> {
 	}
 
 	renderSuggestion(icon: IconName, el: HTMLElement): void {
-		el.addClass("vault-name-icon-suggestion");
+		el.addClass("inline-callout-icon-suggestion");
 		let iconWrapper = el.createDiv();
 		let iconName = el.createSpan();
 		iconName.setAttr("style", "margin-left: .75em; vertical-align:top;");
