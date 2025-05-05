@@ -1,12 +1,15 @@
 {
 	"name": "inline-callouts",
 	"version": "0.1.0",
-	"description": "Inline callouts plugin for Obsidian (https://obsidian.md)",
+	"description": "Inline Callouts: Add inline callouts/badges to notes",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-		"version": "node version-bump.mjs && git add manifest.json versions.json"
+		"version": "node version-bump.mjs && git add manifest.json versions.json",
+		"release": "node release.mjs",
+		"release:minor": "node release.mjs minor",
+		"release:major": "node release.mjs major"
 	},
 	"keywords": [],
 	"author": "",

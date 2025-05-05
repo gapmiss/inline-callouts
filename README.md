@@ -132,18 +132,9 @@ Via BRAT (Beta Reviewer's Auto-update Tool):
 3. Enter this repository, gapmiss/inline-callouts
 4. Enable Vault Name plugin in the community plugin list
 
-
 Manually:
 
-1. download the latest [release archive](https://github.com/gapmiss/inline-callouts/releases/download/0.1.0/inline-callouts-v0.1.0.zip)
-2. uncompress the downloaded archive
-3. move the `inline-callouts` folder to `/path/to/vault/.obsidian/plugins/` 
-4.  Settings > Community plugins > reload **Installed plugins**
-5.  enable plugin
-
-or:
-
-1.  download `main.js`, `manifest.json` & `styles.css`
+1.  download `main.js`, `manifest.json` & `styles.css` from the latest [release](https://github.com/gapmiss/inline-callouts/releases/)
 2.  create a new folder `/path/to/vault/.obsidian/plugins/inline-callouts`
 3.  move all 3 files to `/path/to/vault/.obsidian/plugins/inline-callouts`
 4.  Settings > Community plugins > reload **Installed plugins**
