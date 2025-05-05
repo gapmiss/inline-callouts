@@ -1,7 +1,7 @@
 {
 	"id": "inline-callouts",
 	"name": "Inline Callouts",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"minAppVersion": "0.15.0",
 	"description": "Add inline callouts/badges to notes.",
 	"author": "@gapmiss",
