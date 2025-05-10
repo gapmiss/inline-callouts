@@ -22,7 +22,3 @@ data.json
 .DS_Store
 
 .hotreload
-package-lock.json
-pnpm-lock.yaml
-build-*.sh
-releases/*

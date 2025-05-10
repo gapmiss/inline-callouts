@@ -204,8 +204,8 @@ cd inline-callouts
 ### Install packages and run
 
 ```bash
-pnpm i
-pnpm run dev
+npm i
+npm run dev
 ```
 
 ### Enable plugin
