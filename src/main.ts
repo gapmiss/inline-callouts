@@ -73,6 +73,7 @@ export default class InlineCalloutsPlugin extends Plugin {
 		this.addCommand({
 			id: "new-inline-callout",
 			name: "New inline callout",
+			icon: "form-input",
 			editorCallback: (editor) => {
 				let modal = new NewInlineCalloutModal(this, editor);
 				modal.open();
@@ -83,6 +84,7 @@ export default class InlineCalloutsPlugin extends Plugin {
 			this.addCommand({
 				id: "modify-inline-callout",
 				name: "Modify inline callout",
+				icon: "form-input",
 				editorCheckCallback: (checking, editor, view: MarkdownView) => {
 					let res = this.checkContextType(editor, view);
 					if (res) {
@@ -99,6 +101,7 @@ export default class InlineCalloutsPlugin extends Plugin {
 		this.addCommand({
 			id: "search-inline-callouts",
 			name: "Search for inline callouts",
+			icon: "text-search",
 			callback: () => {
 				let modal = new SearchInlineCalloutsModal(this);
 				modal.open();
