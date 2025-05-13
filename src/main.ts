@@ -116,7 +116,7 @@ export default class InlineCalloutsPlugin extends Plugin {
 						menu.addItem(item => {
 							item
 								.setTitle('Modify inline callout')
-								.setIcon('quote')
+								.setIcon('form-input')
 								.onClick(async () => {
 									this.modifyInlineCallout(editor, view);
 								});
