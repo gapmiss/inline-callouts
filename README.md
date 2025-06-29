@@ -130,7 +130,7 @@ Via BRAT (Beta Reviewer's Auto-update Tool):
 1. Ensure [BRAT](https://github.com/TfTHacker/obsidian42-brat) is installed
 2. Trigger the command Obsidian42 - BRAT: Add a beta plugin for testing
 3. Enter this repository, gapmiss/inline-callouts
-4. Enable Vault Name plugin in the community plugin list
+4. Enable the "Inline Callouts" plugin in the community plugin list
 
 Manually:
 
