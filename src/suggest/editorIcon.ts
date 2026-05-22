@@ -24,6 +24,9 @@ export class EditorIconSuggest extends EditorSuggest<string> {
     }
 
     onTrigger(cursor: EditorPosition, editor: Editor, _: TFile): EditorSuggestTriggerInfo | null {
+        if (!this.plugin.settings.enableSuggester) {
+            return null;
+        }
         const sub = editor.getLine(cursor.line).substring(0, cursor.ch);
         const match = sub.match(/!!\S+$/)?.first();
         if (match) {
@@ -55,7 +58,7 @@ export class EditorIconSuggest extends EditorSuggest<string> {
 
     selectSuggestion(suggestion: string): void {
         if (this.context) {
-            (this.context.editor as Editor).replaceRange('!!' + suggestion.replace("lucide-", ""), this.context.start, this.context.end);
+            this.context.editor.replaceRange('!!' + suggestion.replace("lucide-", ""), this.context.start, this.context.end);
         }
     }
 }

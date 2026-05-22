@@ -4,7 +4,7 @@ import {
 	setIcon
 } from "obsidian";
 
-export class InputIconSuggest extends AbstractInputSuggest<String> {
+export class InputIconSuggest extends AbstractInputSuggest<string> {
 	textInputEl: HTMLInputElement;
 
 	constructor(

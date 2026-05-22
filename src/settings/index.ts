@@ -45,7 +45,7 @@ export class InlineCalloutsSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Enable editing command/menu')
-			.setDesc('In editing view (source & live preview modes), enable "Modify inline callout" command and context menu option.')
+			.setDesc('In editing view (source & live preview modes), enable "modify inline callout" command and context menu option.')
 			.addToggle((toggle) => {
 				toggle
 					.setValue(this.plugin.settings.enableEditing)

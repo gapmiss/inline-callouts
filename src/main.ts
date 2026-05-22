@@ -35,7 +35,7 @@ export default class InlineCalloutsPlugin extends Plugin {
 
 	settings: InlineCalloutsSettings;
 
-	public postprocessor: MarkdownPostProcessor = (el: HTMLElement, ctx: MarkdownPostProcessorContext) => {
+	public postprocessor: MarkdownPostProcessor = (el: HTMLElement, _ctx: MarkdownPostProcessorContext) => {
 		const blockToReplace = el.querySelectorAll('code')
 		if (blockToReplace.length === 0) return
 
@@ -66,44 +66,43 @@ export default class InlineCalloutsPlugin extends Plugin {
 
 		this.registerEditorExtension(viewPlugin)
 
-		if (this.settings.enableSuggester) {
-			this.registerEditorSuggest(new EditorIconSuggest(this));
-		}
+		this.registerEditorSuggest(new EditorIconSuggest(this));
 
 		this.addCommand({
-			id: "new-inline-callout",
+			id: "new",
 			name: "New inline callout",
 			icon: "form-input",
 			editorCallback: (editor) => {
-				let modal = new NewInlineCalloutModal(this, editor);
+				const modal = new NewInlineCalloutModal(this, editor);
 				modal.open();
 			}
 		});
 
-		if (this.settings.enableEditing) {
-			this.addCommand({
-				id: "modify-inline-callout",
-				name: "Modify inline callout",
-				icon: "form-input",
-				editorCheckCallback: (checking, editor, view: MarkdownView) => {
-					let res = this.checkContextType(editor, view);
-					if (res) {
-						if (!checking) {
-							this.modifyInlineCallout(editor, view);
-						}
-						return true;
-					}
+		this.addCommand({
+			id: "modify",
+			name: "Modify inline callout",
+			icon: "form-input",
+			editorCheckCallback: (checking, editor, view: MarkdownView) => {
+				if (!this.settings.enableEditing) {
 					return false;
 				}
-			});
-		}
+				const res = this.checkContextType(editor, view);
+				if (res) {
+					if (!checking) {
+						this.modifyInlineCallout(editor, view);
+					}
+					return true;
+				}
+				return false;
+			}
+		});
 
 		this.addCommand({
-			id: "search-inline-callouts",
-			name: "Search for inline callouts",
+			id: "search",
+			name: "Search",
 			icon: "text-search",
 			callback: () => {
-				let modal = new SearchInlineCalloutsModal(this);
+				const modal = new SearchInlineCalloutsModal(this);
 				modal.open();
 			}
 		});
@@ -111,7 +110,7 @@ export default class InlineCalloutsPlugin extends Plugin {
 		this.registerEvent(
 			this.app.workspace.on("editor-menu", (menu: Menu, editor: Editor, view: MarkdownView) => {
 				if (this.settings.enableEditing) {
-					let res = this.checkContextType(editor, view);
+					const res = this.checkContextType(editor, view);
 					if (res) {
 						menu.addItem(item => {
 							item
@@ -147,7 +146,7 @@ export default class InlineCalloutsPlugin extends Plugin {
 		const beforeCursor = curLine.slice(0, curCh);
 		const afterCursor = curLine.slice(curCh);
 
-		let matcher = { type: ContextType.INLINECODE, regex: /`(\[\!\![^`]+\])`/g, enable: true }
+		const matcher = { type: ContextType.INLINECODE, regex: /`(\[!![^`]+\])`/g, enable: true }
 		const matchInfo = this.getMatchInfo(beforeCursor, afterCursor, matcher.regex);
 
 		if (matchInfo) {
@@ -185,7 +184,7 @@ export default class InlineCalloutsPlugin extends Plugin {
 		const beforeCursor = curLine.slice(0, curCh);
 		const afterCursor = curLine.slice(curCh);
 
-		let matcher = { type: ContextType.INLINECODE, regex: /`(\[\!\![^`]+\])`/g, enable: true }
+		const matcher = { type: ContextType.INLINECODE, regex: /`(\[!![^`]+\])`/g, enable: true }
 		const matchInfo = this.getMatchInfo(beforeCursor, afterCursor, matcher.regex);
 
 		if (matchInfo) {
@@ -207,19 +206,16 @@ export default class InlineCalloutsPlugin extends Plugin {
 			return;
 		}
 
-		const filename = file.basename;
 		const contextType = this.determineContextType(editor, view);
 
 		if (contextType.type == ContextType.NULL) {
-			new Notice("No inline callout found at current cursor position");
+			// eslint-disable-next-line obsidianmd/ui/sentence-case -- false positive
+			new Notice("No inline callout found at current cursor position.");
 			return;
 		}
 
-		const cursor = editor.getCursor();
-		const curLine = cursor.line;
-
 		if (contextType.type == ContextType.INLINECODE) {
-			let modal = new ModifyInlineCalloutModal(this, editor, contextType);
+			const modal = new ModifyInlineCalloutModal(this, editor, contextType);
 			modal.open();
 			return;
 		}
@@ -244,22 +240,11 @@ export default class InlineCalloutsPlugin extends Plugin {
 	}
 
 	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData() as Partial<InlineCalloutsSettings>);
 	}
 
 	async saveSettings() {
 		await this.saveData(this.settings);
-		this.reload();
-	}
-
-	/** Reloads the plugin */
-	async reload() {
-		// @ts-ignore
-		await this.app.plugins.disablePlugin("inline-callouts");
-		// @ts-ignore
-		await this.app.plugins.enablePlugin("inline-callouts");
-		// @ts-ignore
-		this.app.setting.openTabById("inline-callouts").display();
 	}
 
 }

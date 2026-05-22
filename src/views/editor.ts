@@ -40,10 +40,10 @@ export const viewPlugin = ViewPlugin.fromClass(class {
             const startOfLine = line.from;
             const endOfLine = line.to;
 
-            let currentLine = false;
+            let _currentLine = false;
             currentSelections.forEach((r) => {
                 if (r.to >= startOfLine && r.from <= endOfLine) {
-                    currentLine = true;
+                    _currentLine = true;
                     return;
                 }
             });
@@ -69,7 +69,7 @@ export const viewPlugin = ViewPlugin.fromClass(class {
         return builder.finish();
     }
 }, {
-    decorations: (v: any) => v.decorations,
+    decorations: (v: { decorations: DecorationSet }) => v.decorations,
 })
 
 class InlineCalloutWidget extends WidgetType {
@@ -77,7 +77,7 @@ class InlineCalloutWidget extends WidgetType {
         super()
     }
 
-    toDOM(view: EditorView): HTMLElement {
+    toDOM(_view: EditorView): HTMLElement {
         let text: string = this.callout[0].substring(1).substring(this.callout[0].length - 2, 0);
         const inlineCallout = new InlineCallout();
         let newEl = inlineCallout.build(text);

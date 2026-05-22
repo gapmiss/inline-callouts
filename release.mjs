@@ -219,59 +219,7 @@ const createGitCommitAndTag = (version) => {
     execSync('git push', { stdio: 'inherit' });
     execSync('git push --tags', { stdio: 'inherit' });
     console.log('🚀 Changes pushed to GitHub');
-    
-    // Create GitHub Release
-    try {
-      console.log('📦 Creating GitHub Release...');
-      
-      // First check if GitHub CLI is installed
-      try {
-        execSync('gh --version', { stdio: 'pipe' });
-      } catch (error) {
-        console.log('⚠️ GitHub CLI not found. Skipping GitHub Release creation.');
-        console.log('ℹ️ To create GitHub Releases, install GitHub CLI: https://cli.github.com/');
-        return;
-      }
-      
-      // Get previous tag for changelog link
-      let previousTag = '';
-      try {
-        // Get all tags sorted by version (newest first)
-        const tagsOutput = execSync('git tag --sort=-v:refname', { encoding: 'utf-8' });
-        // Split by line and remove empty lines
-        const tags = tagsOutput.split('\n').filter(tag => tag.trim() !== '');
-        
-        // If current tag is in the list, get the next one (which is the previous release)
-        const currentTagIndex = tags.indexOf(tagName);
-        if (currentTagIndex >= 0 && currentTagIndex < tags.length - 1) {
-          previousTag = tags[currentTagIndex + 1];
-        } else if (tags.length > 1 && currentTagIndex < 0) {
-          // If new tag is not yet in the list, take the first one
-          previousTag = tags[0];
-        }
-      } catch (error) {
-        console.warn('⚠️ Could not determine previous tag:', error.message);
-      }
-      
-      // Create release notes with changelog link if previous tag exists
-      let releaseNotes = `${tagName}`;
-      if (previousTag) {
-        const repoUrl = execSync('git config --get remote.origin.url', { encoding: 'utf-8' })
-          .trim()
-          .replace(/\.git$/, '')
-          .replace(/^git@github\.com:/, 'https://github.com/');
-          
-        releaseNotes += `\n\n**Full Changelog**: ${repoUrl}/compare/${previousTag}...${tagName}`;
-      }
-      
-      // Create GitHub Release using GitHub CLI
-      const releaseCommand = `gh release create ${tagName} ${RELEASE_FILES.join(' ')} --title "Release ${tagName}" --notes "${releaseNotes}"`;
-      execSync(releaseCommand, { stdio: 'inherit' });
-      console.log(`✅ GitHub Release created: ${tagName}`);
-    } catch (releaseError) {
-      console.error('⚠️ Failed to create GitHub Release:', releaseError.message);
-      console.log('Release files were still committed and pushed to GitHub.');
-    }
+    console.log('📦 GitHub Actions will create the release with artifact attestations.');
     return true; // Successfully created commit, tag, and pushed
   } catch (error) {
     console.error('❌ Error during Git operations:', error.message);

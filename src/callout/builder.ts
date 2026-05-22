@@ -11,37 +11,37 @@ export class InlineCallout {
 	textEl: HTMLSpanElement;
 
 	constructor() {
-		this.newEl = document.createElement("span");
-		this.iconEl = document.createElement("span");
-		this.labelEl = document.createElement("span");
-		this.textEl = document.createElement("span");
+		this.newEl = createSpan();
+		this.iconEl = createSpan();
+		this.labelEl = createSpan();
+		this.textEl = createSpan();
 	}
 
-	public build(text: string) {
+	public build(text: string): HTMLElement {
 
 		// text content from <code>
-		let part: string = text.substring(3);
-		let content: string = part.slice(0, -1);
+		const part: string = text.substring(3);
+		const content: string = part.slice(0, -1);
 		// parts array split on pipe
-		let parts: any[] = content.split('|');
+		const parts: string[] = content.split('|');
 		// icon
-		let calloutIcon: string | null = parts[0] ? parts[0].trim().replace(/\\+$/, '').toLowerCase() : null;
+		const calloutIcon: string | null = parts[0] ? parts[0].trim().replace(/\\+$/, '').toLowerCase() : null;
 		// label
-		let calloutLabel: string | null = parts[1] ? parts[1].trim().replace(/\\+$/, '') : null;
+		const calloutLabel: string | null = parts[1] ? parts[1].trim().replace(/\\+$/, '') : null;
 		// color
-		let calloutColor: string | null = parts[2] ? parts[2].trim() : null;
+		const calloutColor: string | null = parts[2] ? parts[2].trim() : null;
 		let calloutColorStyle: string;
 
 		// no content, return <code>
 		if (
-			!content.length 
-			|| parts.length === 0 
+			!content.length
+			|| parts.length === 0
 			|| !calloutIcon
 			|| (getIconIds().indexOf('lucide-' + calloutIcon) == -1 && getIconIds().indexOf(calloutIcon) == -1) // 404, no icon found
 		) {
-			this.newEl = document.createElement("code");
-			this.newEl.setText(text)
-			return this.newEl;
+			const codeEl = createEl("code");
+			codeEl.setText(text);
+			return codeEl;
 		}
 
 		this.newEl.addClass("inline-callout");
@@ -74,7 +74,7 @@ export class InlineCallout {
 		this.newEl.appendChild(this.iconEl);
 		// label?
 		if (calloutLabel) {
-			this.labelEl.setText(calloutLabel!);
+			this.labelEl.setText(calloutLabel);
 			this.newEl.appendChild(this.labelEl);
 		}
 		// color?

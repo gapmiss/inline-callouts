@@ -54,7 +54,7 @@ export class IconSuggest extends SuggestModal<IconName> {
 		iconWrapper.appendChild(iconName);
 	}
 
-	onChooseSuggestion(item: string, evt: MouseEvent | KeyboardEvent) {
+	onChooseSuggestion(item: string, _evt: MouseEvent | KeyboardEvent) {
 		setIcon(activeDocument.querySelector('[data-note-toolbar-no-icon]')!, item);
 		IconSuggest.icon = item;
 		this.callback(item);

@@ -14,7 +14,7 @@ export class NewInlineCalloutModal extends Modal {
 	public calloutColor: string | undefined;
 	public calloutLabel: string | undefined;
 	previewEl: HTMLDivElement;
-	document: Document = window.activeDocument ?? window.document;
+	activeDoc: Document = window.activeDocument ?? window.document;
 
 	constructor(
 		private plugin: InlineCalloutsPlugin,
@@ -32,7 +32,7 @@ export class NewInlineCalloutModal extends Modal {
 		}
 	}
 
-	private async display(focus?: boolean, clearColor?: boolean) {
+	private display(_focus?: boolean, _clearColor?: boolean) {
 		const { contentEl } = this;
 		contentEl.empty();
 
@@ -45,9 +45,9 @@ export class NewInlineCalloutModal extends Modal {
 				cb
 					.setIcon(this.calloutIcon)
 					.setTooltip("Select icon")
-					.onClick(async (e) => {
+					.onClick((e) => {
 						e.preventDefault();
-						const modal = new IconSuggest(this.plugin, async (icon) => {
+						const modal = new IconSuggest(this.plugin, (icon) => {
 							this.calloutIcon = icon;
 							this.buildPreview();
 						});
@@ -58,13 +58,15 @@ export class NewInlineCalloutModal extends Modal {
 					cb.buttonEl, 'keydown', (e) => {
 						switch (e.key) {
 							case "Enter":
-							case " ":
+							case " ": {
 								e.preventDefault();
-								const modal = new IconSuggest(this.plugin, async (icon) => {
+								const modal = new IconSuggest(this.plugin, (icon) => {
 									this.calloutIcon = icon;
 									this.buildPreview();
 								});
 								modal.open();
+								break;
+							}
 						}
 					});
 			});
@@ -73,7 +75,7 @@ export class NewInlineCalloutModal extends Modal {
 			.setName("Label")
 			.setDesc("Default: blank")
 			.addText((t) => {
-				t.setValue(this.calloutLabel!);
+				t.setValue(this.calloutLabel ?? '');
 				t.onChange((v) => {
 					this.calloutLabel = v;
 					this.buildPreview();
@@ -109,9 +111,9 @@ export class NewInlineCalloutModal extends Modal {
 							this.calloutColor = value;
 							this.buildPreview();
 							this.display(false, false);
-							setTimeout(() => {
-								let dropdown: HTMLSelectElement | null = this.document.querySelector(".new-inline-callout-modal")!.querySelector(".inline-callouts-color-dropdown .dropdown");
-								dropdown!.focus();
+							window.setTimeout(() => {
+								const dropdown = this.activeDoc.querySelector<HTMLSelectElement>(".new-inline-callout-modal .inline-callouts-color-dropdown .dropdown");
+								dropdown?.focus();
 							}, 10);
 						}
 					})
@@ -120,12 +122,12 @@ export class NewInlineCalloutModal extends Modal {
 				cb.setValue(this.calloutColor ?? '#000000')
 					.onChange((value) => {
 						this.calloutColor = hexToRgb(value);
-						let dropdown: HTMLSelectElement | null = this.document.querySelector(".new-inline-callout-modal")!.querySelector(".inline-callouts-color-dropdown .dropdown");
-						dropdown!.value = '';
+						const dropdown = this.activeDoc.querySelector<HTMLSelectElement>(".new-inline-callout-modal .inline-callouts-color-dropdown .dropdown");
+						if (dropdown) dropdown.value = '';
 						this.buildPreview();
-						setTimeout(() => {
-							let picker: HTMLSelectElement | null = this.document.querySelector(".new-inline-callout-modal")!.querySelector('input[type="color"]');
-							picker!.focus();
+						window.setTimeout(() => {
+							const picker = this.activeDoc.querySelector<HTMLInputElement>(".new-inline-callout-modal input[type='color']");
+							picker?.focus();
 						}, 10);
 					});
 			})
@@ -134,7 +136,6 @@ export class NewInlineCalloutModal extends Modal {
 					.setTooltip('Reset to no color')
 					.onClick(() => {
 						this.calloutColor = '';
-						this.calloutIcon = this.calloutIcon;
 						this.display(false, true);
 					})
 			});
@@ -154,8 +155,8 @@ export class NewInlineCalloutModal extends Modal {
 					.setCta()
 					.onClick(() => {
 						try {
-							let firstPipe: string = '';
-							let secondPipe: string = '';
+							let firstPipe = '';
+							let secondPipe = '';
 							if (this.calloutLabel !== undefined || this.calloutColor !== undefined) {
 								firstPipe = "|";
 							}
@@ -166,13 +167,13 @@ export class NewInlineCalloutModal extends Modal {
 							) {
 								secondPipe = "|";
 							}
-							let trailingSpace: string = this.plugin.settings.enableTraiingSpace ? " " : "";
+							const trailingSpace = this.plugin.settings.enableTraiingSpace ? " " : "";
 							this.editor.getDoc().replaceSelection(
 								`\`[!!${this.calloutIcon.replace("lucide-", "")}${firstPipe + (this.calloutLabel !== undefined ? this.calloutLabel : "")}${this.calloutColor ? secondPipe + this.calloutColor : ""}]\`${trailingSpace}`,
 							);
 							// const cursor = this.editor.getCursor();
 						} catch (e) {
-							console.log(e)
+							console.error(e)
 							new Notice(
 								"There was an issue inserting the inline callout. Please check the developer console for details."
 							);
@@ -188,7 +189,7 @@ export class NewInlineCalloutModal extends Modal {
 		this.previewEl.empty();
 		this.previewEl.setAttr("style", "margin-bottom: 1em;");
 		const inlineCallout = new InlineCallout();
-		let newEl = inlineCallout.build('[!!' + this.calloutIcon + '|' + (this.calloutLabel ? this.calloutLabel : '') + '|' + this.calloutColor + ']');
+		const newEl = inlineCallout.build('[!!' + this.calloutIcon + '|' + (this.calloutLabel ? this.calloutLabel : '') + '|' + this.calloutColor + ']');
 		this.previewEl.appendChild(newEl);
 	}
 

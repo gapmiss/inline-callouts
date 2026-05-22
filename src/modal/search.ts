@@ -2,7 +2,6 @@ import {
     Modal,
     Notice,
     Setting,
-    TextComponent,
     getIconIds
 } from 'obsidian';
 import { InputIconSuggest } from '../suggest/inputIcon';
@@ -22,10 +21,9 @@ export class SearchInlineCalloutsModal extends Modal {
         this.onOpen = () => this.display(true);
     }
 
-    private async display(focus?: boolean) {
+    private display(_focus?: boolean) {
         const { contentEl } = this;
         contentEl.empty();
-        let input: TextComponent;
         this.titleEl.setText("Search inline callouts");
 
         new Setting(contentEl)
@@ -33,7 +31,6 @@ export class SearchInlineCalloutsModal extends Modal {
             .setDesc('Enter text to find an icon to search for.')
             .setClass('search-icon-input')
             .addSearch((t) => {
-                input = t;
                 t.setValue('')
                     .onChange((v) => {
                         this.calloutIcon = v;
@@ -59,7 +56,7 @@ export class SearchInlineCalloutsModal extends Modal {
                                 );
                             }
                         } catch (e) {
-                            console.log(e)
+                            console.error(e)
                             new Notice(
                                 "There was an issue with your search query. Please check the developer console for details.",
                                 5000

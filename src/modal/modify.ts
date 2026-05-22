@@ -8,18 +8,25 @@ import type InlineCalloutsPlugin from "../main";
 import { IconSuggest } from '../suggest/icon';
 import { InlineCallout } from '../callout/builder';
 
+interface ContextData {
+	type: string;
+	curLine: string;
+	match: string | null;
+	range: [number, number];
+}
+
 export class ModifyInlineCalloutModal extends Modal {
 
 	public calloutIcon: string;
 	public calloutColor: string | undefined;
 	public calloutLabel: string | undefined;
 	previewEl: HTMLDivElement;
-	document: Document = window.activeDocument ?? window.document;
+	activeDoc: Document = window.activeDocument ?? window.document;
 
 	constructor(
 		private plugin: InlineCalloutsPlugin,
 		private editor: Editor,
-		private contextType: any
+		private contextType: ContextData
 	) {
 		super(plugin.app);
 
@@ -28,14 +35,14 @@ export class ModifyInlineCalloutModal extends Modal {
 		this.onOpen = () => this.display(true);
 	}
 
-	private async display(focus?: boolean, clearColor?: boolean, preserveIcon?: boolean) {
+	private display(_focus?: boolean, clearColor?: boolean, preserveIcon?: boolean) {
 		const { contentEl } = this;
 		contentEl.empty();
 
 		this.titleEl.setText("Modify inline callout");
 
-		let content = this.contextType.match.replace("[!!", "").replace("]", "");
-		let parts: any[] = content.split('|');
+		const content = (this.contextType.match ?? '').replace("[!!", "").replace("]", "");
+		const parts: string[] = content.split('|');
 
 		// icon
 		if (!clearColor) {
@@ -46,14 +53,14 @@ export class ModifyInlineCalloutModal extends Modal {
 
 		// label
 		if (!clearColor) {
-			this.calloutLabel = this.calloutLabel! ? this.calloutLabel : (parts[1] ? parts[1].trim().replace(/\\+$/, '') : undefined);
+			this.calloutLabel = this.calloutLabel ? this.calloutLabel : (parts[1] ? parts[1].trim().replace(/\\+$/, '') : undefined);
 		}
 
 		// color
 		if (clearColor) {
 			this.calloutColor = '';
 		} else {
-			this.calloutColor = this.calloutColor! ? this.calloutColor : (parts[2] ? parts[2].trim() : undefined);
+			this.calloutColor = this.calloutColor ? this.calloutColor : (parts[2] ? parts[2].trim() : undefined);
 		}
 
 		new Setting(contentEl)
@@ -63,9 +70,9 @@ export class ModifyInlineCalloutModal extends Modal {
 				cb
 					.setIcon(this.calloutIcon ? this.calloutIcon : "lucide-info")
 					.setTooltip("Select icon")
-					.onClick(async (e) => {
+					.onClick((e) => {
 						e.preventDefault();
-						const modal = new IconSuggest(this.plugin, async (icon) => {
+						const modal = new IconSuggest(this.plugin, (icon) => {
 							this.calloutIcon = icon;
 							this.buildPreview();
 						});
@@ -76,13 +83,15 @@ export class ModifyInlineCalloutModal extends Modal {
 					cb.buttonEl, 'keydown', (e) => {
 						switch (e.key) {
 							case "Enter":
-							case " ":
+							case " ": {
 								e.preventDefault();
-								const modal = new IconSuggest(this.plugin, async (icon) => {
+								const modal = new IconSuggest(this.plugin, (icon) => {
 									this.calloutIcon = icon;
 									this.buildPreview();
 								});
 								modal.open();
+								break;
+							}
 						}
 					});
 			});
@@ -109,7 +118,7 @@ export class ModifyInlineCalloutModal extends Modal {
 			return `${r}, ${g}, ${b}`;
 		};
 
-		function rgbToHex(r: any, g: any, b: any) {
+		function rgbToHex(r: number, g: number, b: number) {
 			return '#' + ((1 << 24) + (r << 16) + (g << 8) + b)
 				.toString(16)
 				.slice(1)
@@ -138,34 +147,33 @@ export class ModifyInlineCalloutModal extends Modal {
 							this.calloutColor = value;
 							this.buildPreview();
 							this.display(false, false, true);
-							setTimeout(() => {
-								let dropdown: HTMLSelectElement | null = this.document.querySelector(".modify-inline-callout-modal")!.querySelector(".inline-callouts-color-dropdown .dropdown");
-								dropdown!.focus();
+							window.setTimeout(() => {
+								const dropdown = this.activeDoc.querySelector<HTMLSelectElement>(".modify-inline-callout-modal .inline-callouts-color-dropdown .dropdown");
+								dropdown?.focus();
 							}, 10);
 						}
 					})
 			})
 			.addColorPicker((cb) => {
-				let r: number = 0;
-				let g: number = 0;
-				let b: number = 0;
+				let r = 0;
+				let g = 0;
+				let b = 0;
 				if (this.calloutColor) {
-					let colorArr = this.calloutColor?.split(",");
-					r = Number(colorArr![0]);
-					g = Number(colorArr![1]);
-					b = Number(colorArr![2]);
+					const colorArr = this.calloutColor.split(",");
+					r = Number(colorArr[0] ?? 0);
+					g = Number(colorArr[1] ?? 0);
+					b = Number(colorArr[2] ?? 0);
 				}
 				cb.setValue(rgbToHex(r, g, b))
 					.onChange((value) => {
 						this.calloutColor = hexToRgb(value);
-						let dropdown: HTMLSelectElement | null = this.document.querySelector(".modify-inline-callout-modal")!.querySelector(".inline-callouts-color-dropdown .dropdown");
-						dropdown!.value = '';
+						const dropdown = this.activeDoc.querySelector<HTMLSelectElement>(".modify-inline-callout-modal .inline-callouts-color-dropdown .dropdown");
+						if (dropdown) dropdown.value = '';
 						this.buildPreview();
-						setTimeout(() => {
-							let picker: HTMLSelectElement | null = this.document.querySelector(".modify-inline-callout-modal")!.querySelector('input[type="color"]');
-							picker!.focus();
+						window.setTimeout(() => {
+							const picker = this.activeDoc.querySelector<HTMLInputElement>(".modify-inline-callout-modal input[type='color']");
+							picker?.focus();
 						}, 10);
-
 					});
 			})
 			.addExtraButton((ex) => {
@@ -173,7 +181,6 @@ export class ModifyInlineCalloutModal extends Modal {
 					.setTooltip('Reset to no color')
 					.onClick(() => {
 						this.calloutColor = '';
-						this.calloutIcon = this.calloutIcon;
 						this.display(false, true);
 					})
 			});
@@ -193,8 +200,8 @@ export class ModifyInlineCalloutModal extends Modal {
 					.setCta()
 					.onClick(() => {
 						try {
-							let firstPipe: string = '';
-							let secondPipe: string = '';
+							let firstPipe = '';
+							let secondPipe = '';
 
 							if (this.calloutLabel !== undefined || this.calloutColor !== undefined) {
 								firstPipe = "|";
@@ -207,14 +214,14 @@ export class ModifyInlineCalloutModal extends Modal {
 								secondPipe = "|";
 							}
 
-							let cursor = this.editor.getCursor();
+							const cursor = this.editor.getCursor();
 							this.editor.replaceRange(
 								`\`[!!${this.calloutIcon.replace("lucide-", "")}${firstPipe + (this.calloutLabel !== undefined ? this.calloutLabel : "")}${this.calloutColor ? secondPipe + this.calloutColor : ""}]\``,
-								{ line: cursor.line, ch: this.contextType.range?.[0] }, { line: cursor.line, ch: this.contextType.range?.[1] }
+								{ line: cursor.line, ch: this.contextType.range[0] }, { line: cursor.line, ch: this.contextType.range[1] }
 							);
 
 						} catch (e) {
-							console.log(e)
+							console.error(e);
 							new Notice(
 								"There was an issue saving the inline callout. Check the developer console for details."
 							);
@@ -229,7 +236,7 @@ export class ModifyInlineCalloutModal extends Modal {
 		this.previewEl.empty();
 		this.previewEl.setAttr("style", "margin-bottom: 1em;");
 		const inlineCallout = new InlineCallout();
-		let newEl = inlineCallout.build('[!!' + this.calloutIcon + '|' + (this.calloutLabel ? this.calloutLabel : '') + '|' + this.calloutColor + ']');
+		const newEl = inlineCallout.build('[!!' + this.calloutIcon + '|' + (this.calloutLabel ? this.calloutLabel : '') + '|' + this.calloutColor + ']');
 		this.previewEl.appendChild(newEl);
 	}
 
