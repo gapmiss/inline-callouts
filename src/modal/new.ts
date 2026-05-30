@@ -38,18 +38,23 @@ export class NewInlineCalloutModal extends Modal {
 
 		this.titleEl.setText("New inline callout");
 
+		const isNoIcon = this.calloutIcon === 'none' || this.calloutIcon === 'blank' || this.calloutIcon?.endsWith('-none');
 		new Setting(contentEl)
 			.setName('Icon')
 			.setDesc('To select an icon, click the button. Default: info')
 			.addButton((cb) => {
-				cb
-					.setIcon(this.calloutIcon)
-					.setTooltip("Select icon")
+				if (isNoIcon) {
+					cb.setButtonText('None');
+				} else {
+					cb.setIcon(this.calloutIcon);
+				}
+				cb.setTooltip(isNoIcon ? "No icon" : "Select icon")
 					.onClick((e) => {
 						e.preventDefault();
 						const modal = new IconSuggest(this.plugin, (icon) => {
 							this.calloutIcon = icon;
 							this.buildPreview();
+							this.display(false);
 						});
 						modal.open();
 					});
@@ -63,11 +68,21 @@ export class NewInlineCalloutModal extends Modal {
 								const modal = new IconSuggest(this.plugin, (icon) => {
 									this.calloutIcon = icon;
 									this.buildPreview();
+									this.display(false);
 								});
 								modal.open();
 								break;
 							}
 						}
+					});
+			})
+			.addExtraButton((cb) => {
+				cb.setIcon('circle-off')
+					.setTooltip('No icon')
+					.onClick(() => {
+						this.calloutIcon = 'none';
+						this.buildPreview();
+						this.display(false);
 					});
 			});
 

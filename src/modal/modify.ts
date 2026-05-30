@@ -63,18 +63,23 @@ export class ModifyInlineCalloutModal extends Modal {
 			this.calloutColor = this.calloutColor ? this.calloutColor : (parts[2] ? parts[2].trim() : undefined);
 		}
 
+		const isNoIcon = this.calloutIcon === 'none' || this.calloutIcon === 'blank' || this.calloutIcon?.endsWith('-none');
 		new Setting(contentEl)
 			.setName('Icon')
 			.setDesc('To select an icon, click the button. Default: info')
 			.addButton((cb) => {
-				cb
-					.setIcon(this.calloutIcon ? this.calloutIcon : "lucide-info")
-					.setTooltip("Select icon")
+				if (isNoIcon) {
+					cb.setButtonText('None');
+				} else {
+					cb.setIcon(this.calloutIcon ? this.calloutIcon : "lucide-info");
+				}
+				cb.setTooltip(isNoIcon ? "No icon" : "Select icon")
 					.onClick((e) => {
 						e.preventDefault();
 						const modal = new IconSuggest(this.plugin, (icon) => {
 							this.calloutIcon = icon;
 							this.buildPreview();
+							this.display(false, false, true);
 						});
 						modal.open();
 					});
@@ -88,11 +93,21 @@ export class ModifyInlineCalloutModal extends Modal {
 								const modal = new IconSuggest(this.plugin, (icon) => {
 									this.calloutIcon = icon;
 									this.buildPreview();
+									this.display(false, false, true);
 								});
 								modal.open();
 								break;
 							}
 						}
+					});
+			})
+			.addExtraButton((cb) => {
+				cb.setIcon('circle-off')
+					.setTooltip('No icon')
+					.onClick(() => {
+						this.calloutIcon = 'none';
+						this.buildPreview();
+						this.display(false, false, true);
 					});
 			});
 
