@@ -82,13 +82,6 @@ export class NewInlineCalloutModal extends Modal {
 				});
 			});
 
-		const hexToRgb = (hex: string) => {
-			const r = parseInt(hex.slice(1, 3), 16);
-			const g = parseInt(hex.slice(3, 5), 16);
-			const b = parseInt(hex.slice(5, 7), 16);
-			return `${r}, ${g}, ${b}`;
-		};
-
 		new Setting(contentEl)
 			.setName('Color')
 			.setDesc('Pick a color using the dropdown or color picker. Default: Obsidian\'s base color')
@@ -119,9 +112,9 @@ export class NewInlineCalloutModal extends Modal {
 					})
 			})
 			.addColorPicker((cb) => {
-				cb.setValue(this.calloutColor ?? '#000000')
+				cb.setValue(this.calloutColor?.startsWith('#') ? this.calloutColor : '#000000')
 					.onChange((value) => {
-						this.calloutColor = hexToRgb(value);
+						this.calloutColor = value;
 						const dropdown = this.activeDoc.querySelector<HTMLSelectElement>(".new-inline-callout-modal .inline-callouts-color-dropdown .dropdown");
 						if (dropdown) dropdown.value = '';
 						this.buildPreview();

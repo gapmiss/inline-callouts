@@ -111,18 +111,18 @@ export class ModifyInlineCalloutModal extends Modal {
 				});
 			});
 
-		const hexToRgb = (hex: string) => {
-			const r = parseInt(hex.slice(1, 3), 16);
-			const g = parseInt(hex.slice(3, 5), 16);
-			const b = parseInt(hex.slice(5, 7), 16);
-			return `${r}, ${g}, ${b}`;
-		};
-
-		function rgbToHex(r: number, g: number, b: number) {
-			return '#' + ((1 << 24) + (r << 16) + (g << 8) + b)
-				.toString(16)
-				.slice(1)
-				.toUpperCase();
+		function colorToHex(color: string | undefined): string {
+			if (!color) return '#000000';
+			if (color.startsWith('#')) return color;
+			// Convert RGB string to hex
+			const parts = color.split(',').map(s => parseInt(s.trim(), 10));
+			if (parts.length >= 3 && parts.every(n => !isNaN(n))) {
+				return '#' + ((1 << 24) + (parts[0] << 16) + (parts[1] << 8) + parts[2])
+					.toString(16)
+					.slice(1)
+					.toUpperCase();
+			}
+			return '#000000';
 		}
 
 		new Setting(contentEl)
@@ -155,18 +155,9 @@ export class ModifyInlineCalloutModal extends Modal {
 					})
 			})
 			.addColorPicker((cb) => {
-				let r = 0;
-				let g = 0;
-				let b = 0;
-				if (this.calloutColor) {
-					const colorArr = this.calloutColor.split(",");
-					r = Number(colorArr[0] ?? 0);
-					g = Number(colorArr[1] ?? 0);
-					b = Number(colorArr[2] ?? 0);
-				}
-				cb.setValue(rgbToHex(r, g, b))
+				cb.setValue(colorToHex(this.calloutColor))
 					.onChange((value) => {
-						this.calloutColor = hexToRgb(value);
+						this.calloutColor = value;
 						const dropdown = this.activeDoc.querySelector<HTMLSelectElement>(".modify-inline-callout-modal .inline-callouts-color-dropdown .dropdown");
 						if (dropdown) dropdown.value = '';
 						this.buildPreview();
