@@ -36,6 +36,10 @@ function parseColorToRgb(color: string): string | null {
 	return trimmed;
 }
 
+function isNoIcon(icon: string): boolean {
+	return icon === 'none' || icon === 'blank' || icon.endsWith('-none');
+}
+
 export class InlineCallout {
 
 	newEl: HTMLSpanElement;
@@ -66,11 +70,12 @@ export class InlineCallout {
 		let calloutColorStyle: string;
 
 		// no content, return <code>
+		const noIcon = calloutIcon ? isNoIcon(calloutIcon) : false;
 		if (
 			!content.length
 			|| parts.length === 0
 			|| !calloutIcon
-			|| (getIconIds().indexOf('lucide-' + calloutIcon) == -1 && getIconIds().indexOf(calloutIcon) == -1) // 404, no icon found
+			|| (!noIcon && getIconIds().indexOf('lucide-' + calloutIcon) == -1 && getIconIds().indexOf(calloutIcon) == -1) // 404, no icon found
 		) {
 			const codeEl = createEl("code");
 			codeEl.setText(text);
@@ -85,29 +90,35 @@ export class InlineCallout {
 
 		// icon only
 		if (parts.length === 1) {
-			this.iconEl.setAttr("aria-label", calloutIcon);
-			setIcon(this.iconEl, calloutIcon);
-			this.newEl.appendChild(this.iconEl);
+			if (!noIcon) {
+				this.iconEl.setAttr("aria-label", calloutIcon);
+				setIcon(this.iconEl, calloutIcon);
+				this.newEl.appendChild(this.iconEl);
+			}
 			return this.newEl;
 		}
 
 		// icon and color only
 		if (!calloutLabel && calloutColor) {
-			const rgb = parseColorToRgb(calloutColor);
-			if (rgb) {
-				calloutColorStyle = "color: rgba(" + rgb + ", 1);"
-				this.iconEl.setAttr("style", calloutColorStyle);
+			if (!noIcon) {
+				const rgb = parseColorToRgb(calloutColor);
+				if (rgb) {
+					calloutColorStyle = "color: rgba(" + rgb + ", 1);"
+					this.iconEl.setAttr("style", calloutColorStyle);
+				}
+				this.iconEl.setAttr("aria-label", calloutIcon);
+				setIcon(this.iconEl, calloutIcon);
+				this.newEl.appendChild(this.iconEl);
 			}
-			this.iconEl.setAttr("aria-label", calloutIcon);
-			setIcon(this.iconEl, calloutIcon);
-			this.newEl.appendChild(this.iconEl);
 			return this.newEl;
 		}
 
 		// icon
-		this.iconEl.setAttr("aria-label", calloutIcon);
-		setIcon(this.iconEl, calloutIcon);
-		this.newEl.appendChild(this.iconEl);
+		if (!noIcon) {
+			this.iconEl.setAttr("aria-label", calloutIcon);
+			setIcon(this.iconEl, calloutIcon);
+			this.newEl.appendChild(this.iconEl);
+		}
 		// label?
 		if (calloutLabel) {
 			this.labelEl.setText(calloutLabel);

@@ -94,11 +94,11 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 `[!!ICON|LABEL|COLOR]`
 ```
 
-| Syntax            | Details                                  |
-| ----------------- | ---------------------------------------- |
-| `ICON`            | Name of the Lucide icon                  |
-| `LABEL`(optional) | Callout label/title text                 |
-| `COLOR`(optional) | Hex, RGB values, or Obsidian CSS var     |
+| Syntax            | Details                                            |
+| ----------------- | -------------------------------------------------- |
+| `ICON`            | Lucide icon name, or `none`/`blank` for no icon    |
+| `LABEL`(optional) | Callout label/title text                           |
+| `COLOR`(optional) | Hex, RGB values, or Obsidian CSS var               |
 
 
 > [!IMPORTANT]

@@ -58,6 +58,19 @@ body {
 	width: calc(var(--dialog-width) / 1.5);
 }
 
+/* No-icon callouts: hide icon and adjust label spacing */
+[data-inline-callout="none"] .inline-callout-icon,
+[data-inline-callout="blank"] .inline-callout-icon,
+[data-inline-callout$="-none"] .inline-callout-icon {
+	display: none;
+}
+
+[data-inline-callout="none"] .inline-callout-label,
+[data-inline-callout="blank"] .inline-callout-label,
+[data-inline-callout$="-none"] .inline-callout-label {
+	margin-left: var(--inline-callout-label-margin-right);
+}
+
 /* @settings
 name: Inline Callouts
 id: inline-callouts
