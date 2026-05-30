@@ -151,6 +151,7 @@ See [CSS snippets - Obsidian Help](https://help.obsidian.md/Extending+Obsidian/C
 
 ```css
 body {
+    --inline-callout-font-family: inherit;
     --inline-callout-font-size: .85em;
     --inline-callout-font-weight: 400;
     --inline-callout-border-radius: 4px;

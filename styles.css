@@ -1,4 +1,5 @@
 body {
+    --inline-callout-font-family: inherit;
     --inline-callout-font-size: .85em;
     --inline-callout-font-weight: 400;
     --inline-callout-border-radius: 4px;
@@ -45,6 +46,7 @@ body {
 }
 
 .inline-callout-label {
+    font-family: var(--inline-callout-font-family);
     font-size: var(--inline-callout-font-size);
     margin-top: var(--inline-callout-label-margin-top);
     margin-right: var(--inline-callout-label-margin-right);
@@ -157,6 +159,11 @@ settings:
   type: heading
   level: 4
   collapsed: true
+-
+  id: inline-callout-font-family
+  title: Font family
+  type: variable-text
+  default: inherit
 -
   id: inline-callout-font-size
   title: Font size
