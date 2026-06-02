@@ -4,16 +4,30 @@
 
 A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/obsidianmd); a successor to the [Badges](https://github.com/gapmiss/badges) plugin by the same author. Key differences: simpler syntax, access to all Lucide icons in Obsidian, modal interfaces for icon suggestions, new inline callout and modify inline callout.
 
-- [Demo](#demo)
-- [Features](#features)
-- [Usage](#usage)
-- [Caveats](#caveats)
-- [Installation](#installation)
-- [CSS styles](#css)
-- [Style Settings plugin](#style-settings-plugin)
-- [Development](#development)
-- [Credits](#credits)
-- [Notes](#notes)
+## Installation
+
+[Install from community.obsidian.md](https://community.obsidian.md/plugins/inline-callouts)
+
+From Obsidian's settings or preferences:
+
+1. Community Plugins > Browse
+2. Search for "Inline Callouts"
+
+Manually:
+
+1. download the latest [release](https://github.com/gapmiss/inline-callouts/releases/latest) archive
+2. uncompress the downloaded archive
+3. move the `inline-callouts` folder to `/path/to/vault/.obsidian/plugins/` 
+4.  Settings > Community plugins > reload **Installed plugins**
+5.  enable plugin
+
+or:
+
+1.  download `main.js`, `manifest.json` & `styles.css` from the latest [release](https://github.com/gapmiss/inline-callouts/releases/latest)
+2.  create a new folder `/path/to/vault/.obsidian/plugins/inline-callouts`
+3.  move all 3 files to `/path/to/vault/.obsidian/plugins/inline-callouts`
+4.  Settings > Community plugins > reload **Installed plugins**
+5.  enable plugin
 
 ## Demo
 
