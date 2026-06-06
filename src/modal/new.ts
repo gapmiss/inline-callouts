@@ -13,7 +13,7 @@ export class NewInlineCalloutModal extends Modal {
 	public calloutIcon: string = 'lucide-info';
 	public calloutColor: string | undefined;
 	public calloutLabel: string | undefined;
-	previewEl: HTMLDivElement;
+	previewEl!: HTMLDivElement;
 	activeDoc: Document = window.activeDocument ?? window.document;
 
 	constructor(

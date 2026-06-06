@@ -14,6 +14,7 @@ export class InputIconSuggest extends AbstractInputSuggest<string> {
 
 	) {
 		super(app, inputEl);
+		this.textInputEl = inputEl;
 	}
 
 	getSuggestions(inputStr: string): string[] {

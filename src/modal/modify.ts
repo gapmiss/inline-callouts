@@ -17,10 +17,10 @@ interface ContextData {
 
 export class ModifyInlineCalloutModal extends Modal {
 
-	public calloutIcon: string;
+	public calloutIcon: string = 'info';
 	public calloutColor: string | undefined;
 	public calloutLabel: string | undefined;
-	previewEl: HTMLDivElement;
+	previewEl!: HTMLDivElement;
 	activeDoc: Document = window.activeDocument ?? window.document;
 
 	constructor(

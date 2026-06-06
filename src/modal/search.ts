@@ -9,7 +9,7 @@ import type InlineCalloutsPlugin from "../main";
 
 export class SearchInlineCalloutsModal extends Modal {
 
-    public calloutIcon: string;
+    public calloutIcon: string = '';
 
     constructor(
         private plugin: InlineCalloutsPlugin,

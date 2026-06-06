@@ -4,8 +4,7 @@ import {
 	MarkdownPostProcessorContext,
 	Editor,
 	MarkdownView,
-	Notice,
-	Menu
+	Notice
 } from 'obsidian';
 import {
 	InlineCalloutsSettings,
@@ -33,7 +32,7 @@ interface ContextData {
 
 export default class InlineCalloutsPlugin extends Plugin {
 
-	settings: InlineCalloutsSettings;
+	settings!: InlineCalloutsSettings;
 
 	public postprocessor: MarkdownPostProcessor = (el: HTMLElement, _ctx: MarkdownPostProcessorContext) => {
 		const blockToReplace = el.querySelectorAll('code')
@@ -82,14 +81,17 @@ export default class InlineCalloutsPlugin extends Plugin {
 			id: "modify",
 			name: "Modify inline callout",
 			icon: "form-input",
-			editorCheckCallback: (checking, editor, view: MarkdownView) => {
+			editorCheckCallback: (checking, editor, ctx) => {
 				if (!this.settings.enableEditing) {
 					return false;
 				}
-				const res = this.checkContextType(editor, view);
+				if (!(ctx instanceof MarkdownView)) {
+					return false;
+				}
+				const res = this.checkContextType(editor, ctx);
 				if (res) {
 					if (!checking) {
-						this.modifyInlineCallout(editor, view);
+						this.modifyInlineCallout(editor, ctx);
 					}
 					return true;
 				}
@@ -108,21 +110,22 @@ export default class InlineCalloutsPlugin extends Plugin {
 		});
 
 		this.registerEvent(
-			this.app.workspace.on("editor-menu", (menu: Menu, editor: Editor, view: MarkdownView) => {
+			this.app.workspace.on("editor-menu", (menu, editor, info) => {
 				if (this.settings.enableEditing) {
-					const res = this.checkContextType(editor, view);
+					if (!(info instanceof MarkdownView)) {
+						return;
+					}
+					const res = this.checkContextType(editor, info);
 					if (res) {
 						menu.addItem(item => {
 							item
 								.setTitle('Modify inline callout')
 								.setIcon('form-input')
-								.onClick(async () => {
-									this.modifyInlineCallout(editor, view);
+								.onClick(() => {
+									this.modifyInlineCallout(editor, info);
 								});
-						})
-						return true;
+						});
 					}
-					return false;
 				}
 			})
 		);

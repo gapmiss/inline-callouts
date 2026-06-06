@@ -3,7 +3,7 @@ import {
 	PluginSettingTab,
 	Setting
 } from 'obsidian';
-import InlineCalloutsPlugin from 'src/main';
+import InlineCalloutsPlugin from '../main';
 
 export interface InlineCalloutsSettings {
 	enableSuggester: boolean;
