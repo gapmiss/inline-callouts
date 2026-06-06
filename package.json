@@ -1,6 +1,6 @@
 {
 	"name": "inline-callouts",
-	"version": "0.1.9",
+	"version": "0.1.10",
 	"description": "Inline Callouts: Add inline callouts/badges to notes",
 	"main": "main.js",
 	"scripts": {
