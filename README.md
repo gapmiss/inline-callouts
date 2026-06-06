@@ -130,31 +130,6 @@ or:
 	| `[!!info\|Lorem\|var(--color-blue-rgb)]` |
 	```
 
-## Installation
-
-[Find at Obsidian.md/plugins](https://obsidian.md/plugins?search=inline-callouts)
-
-From Obsidian's settings:
-
-1. Community Plugins > Browse
-2. Search for "Inline Callouts"
-
-Via BRAT (Beta Reviewer's Auto-update Tool):
-
-1. Ensure [BRAT](https://github.com/TfTHacker/obsidian42-brat) is installed
-2. Trigger the command Obsidian42 - BRAT: Add a beta plugin for testing
-3. Enter this repository, gapmiss/inline-callouts
-4. Enable the "Inline Callouts" plugin in the community plugin list
-
-Manually:
-
-1.  download `main.js`, `manifest.json` & `styles.css` from the latest [release](https://github.com/gapmiss/inline-callouts/releases/)
-2.  create a new folder `/path/to/vault/.obsidian/plugins/inline-callouts`
-3.  move all 3 files to `/path/to/vault/.obsidian/plugins/inline-callouts`
-4.  Settings > Community plugins > reload **Installed plugins**
-5.  enable plugin
-
-
 ## CSS
 
 Custom `CSS` styles can be applied via CSS snippets. All colors and styles can be over-written just the same.
