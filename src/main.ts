@@ -149,7 +149,7 @@ export default class InlineCalloutsPlugin extends Plugin {
 		const beforeCursor = curLine.slice(0, curCh);
 		const afterCursor = curLine.slice(curCh);
 
-		const matcher = { type: ContextType.INLINECODE, regex: /`(\[!![^`]+\])`/g, enable: true }
+		const matcher = { type: ContextType.INLINECODE, regex: /^`(\[!![^`]+\])`$/, enable: true }
 		const matchInfo = this.getMatchInfo(beforeCursor, afterCursor, matcher.regex);
 
 		if (matchInfo) {
