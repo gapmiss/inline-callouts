@@ -5,7 +5,7 @@ import { ViewPlugin, WidgetType, EditorView, ViewUpdate, Decoration, DecorationS
 import { RangeSetBuilder } from "@codemirror/state";
 import { InlineCallout } from '../callout/builder';
 
-const REGEXP = /(`\[!!([^\]]*)\]`)/gm;
+const REGEXP = /(`\[!!([^`]+)\]`)/gm;
 
 export const viewPlugin = ViewPlugin.fromClass(class {
     decorations: DecorationSet;
