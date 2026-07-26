@@ -212,8 +212,7 @@ export default class InlineCalloutsPlugin extends Plugin {
 		const contextType = this.determineContextType(editor, view);
 
 		if (contextType.type == ContextType.NULL) {
-			// eslint-disable-next-line obsidianmd/ui/sentence-case -- false positive
-			new Notice("No inline callout found at current cursor position.");
+			new Notice("No inline callout found at the current position.");
 			return;
 		}
 
