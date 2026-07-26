@@ -51,7 +51,12 @@ export const viewPlugin = ViewPlugin.fromClass(class {
                     }
                 })
                 if (add) {
-                    builder.add(from, to, Decoration.widget({ widget: new InlineCalloutWidget(match) }))
+                    // inclusiveStart gives the decoration a negative startSide. Without it,
+                    // when the editor is reconfigured on a live view (enabling/disabling a
+                    // plugin), CodeMirror's redraw range starts inside the replaced span and
+                    // it emits a continueWidget placeholder instead of the callout, leaving
+                    // a blank gap. Decoration.widget used to avoid this via its -1e8 startSide.
+                    builder.add(from, to, Decoration.replace({ widget: new InlineCalloutWidget(match), inclusiveStart: true }))
                 }
             }
         }
@@ -62,14 +67,20 @@ export const viewPlugin = ViewPlugin.fromClass(class {
 })
 
 class InlineCalloutWidget extends WidgetType {
+    readonly text: string;
+
     constructor(readonly callout: string[]) {
         super()
+        this.text = this.callout[0].substring(1).substring(this.callout[0].length - 2, 0);
+    }
+
+    eq(other: InlineCalloutWidget): boolean {
+        return this.text === other.text;
     }
 
     toDOM(_view: EditorView): HTMLElement {
-        let text: string = this.callout[0].substring(1).substring(this.callout[0].length - 2, 0);
         const inlineCallout = new InlineCallout();
-        let newEl = inlineCallout.build(text);
+        let newEl = inlineCallout.build(this.text);
         return newEl;
     }
 }
