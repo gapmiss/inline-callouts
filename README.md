@@ -6,6 +6,9 @@ A plugin for displaying inline "callouts" in [Obsidian.md](https://github.com/ob
 
 ## Installation
 
+> [!IMPORTANT]
+> Requires Obsidian v1.13.0 or later. The settings tab uses the declarative settings API introduced in that version, so the plugin will not install on earlier releases. Vaults below v1.13.0 will continue to be offered v0.1.12, the last compatible release.
+
 [Install from community.obsidian.md](https://community.obsidian.md/plugins/inline-callouts)
 
 From Obsidian's settings or preferences:

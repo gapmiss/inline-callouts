@@ -245,8 +245,4 @@ export default class InlineCalloutsPlugin extends Plugin {
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData() as Partial<InlineCalloutsSettings>);
 	}
 
-	async saveSettings() {
-		await this.saveData(this.settings);
-	}
-
 }

@@ -1,7 +1,7 @@
 import {
 	App,
 	PluginSettingTab,
-	Setting
+	SettingDefinitionItem
 } from 'obsidian';
 import InlineCalloutsPlugin from '../main';
 
@@ -25,47 +25,25 @@ export class InlineCalloutsSettingTab extends PluginSettingTab {
 		this.plugin = plugin;
 	}
 
-	display(): void {
-		const { containerEl } = this;
-
-		containerEl.empty();
-
-		new Setting(containerEl)
-			.setName('Enable icon suggestions')
-			.setDesc('In editing view (source & live preview modes), enable inline icon auto-complete suggestions.')
-			.setClass("inline-callouts-enable-icon-suggestions")
-			.addToggle((toggle) => {
-				toggle
-					.setValue(this.plugin.settings.enableSuggester)
-					.onChange(async newValue => {
-						this.plugin.settings.enableSuggester = newValue;
-						await this.plugin.saveSettings();
-					})
-			});
-
-		new Setting(containerEl)
-			.setName('Enable editing command/menu')
-			.setDesc('In editing view (source & live preview modes), enable "modify inline callout" command and context menu option.')
-			.addToggle((toggle) => {
-				toggle
-					.setValue(this.plugin.settings.enableEditing)
-					.onChange(async newValue => {
-						this.plugin.settings.enableEditing = newValue;
-						await this.plugin.saveSettings();
-					})
-			})
-
-		new Setting(containerEl)
-			.setName('Include trailing space')
-			.setDesc('When inserting a new inline callout, append a trailing space immediately after the inline callout code.')
-			.addToggle((toggle) => {
-				toggle
-					.setValue(this.plugin.settings.enableTraiingSpace)
-					.onChange(async newValue => {
-						this.plugin.settings.enableTraiingSpace = newValue;
-						await this.plugin.saveSettings();
-					})
-			})
-
+	// Obsidian renders the tab from these definitions and indexes them for
+	// settings search. Controls bind directly to this.plugin.settings[key].
+	getSettingDefinitions(): SettingDefinitionItem<keyof InlineCalloutsSettings>[] {
+		return [
+			{
+				name: 'Enable icon suggestions',
+				desc: 'In editing view (source & live preview modes), enable inline icon auto-complete suggestions.',
+				control: { type: 'toggle', key: 'enableSuggester' },
+			},
+			{
+				name: 'Enable editing command/menu',
+				desc: 'In editing view (source & live preview modes), enable "modify inline callout" command and context menu option.',
+				control: { type: 'toggle', key: 'enableEditing' },
+			},
+			{
+				name: 'Include trailing space',
+				desc: 'When inserting a new inline callout, append a trailing space immediately after the inline callout code.',
+				control: { type: 'toggle', key: 'enableTraiingSpace' },
+			},
+		];
 	}
 }
